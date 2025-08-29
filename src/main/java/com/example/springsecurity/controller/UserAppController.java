@@ -4,6 +4,7 @@ import com.example.springsecurity.entity.UserApp;
 import com.example.springsecurity.repository.UserAppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,9 @@ public class UserAppController {
     
     @Autowired
     private UserAppRepository userAppRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
     @GetMapping
     public List<UserApp> getAllUsers() {
@@ -34,8 +38,21 @@ public class UserAppController {
     }
     
     @PostMapping
-    public UserApp createUser(@RequestBody UserApp userApp) {
-        return userAppRepository.save(userApp);
+    public ResponseEntity<String> createUser(@RequestBody UserApp userApp) {
+        if (userAppRepository.existsByUsername(userApp.getUsername())) {
+            return ResponseEntity.badRequest().body("Username already exists");
+        }
+        if (userAppRepository.existsByEmail(userApp.getEmail())) {
+            return ResponseEntity.badRequest().body("Email already exists");
+        }
+        
+        userApp.setPassword(passwordEncoder.encode(userApp.getPassword()));
+        if (userApp.getEnabled() == null) {
+            userApp.setEnabled(true);
+        }
+        
+        userAppRepository.save(userApp);
+        return ResponseEntity.ok("User created successfully");
     }
     
     @PutMapping("/{id}")
