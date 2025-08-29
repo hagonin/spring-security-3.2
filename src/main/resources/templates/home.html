@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Security Demo - Home</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        nav { background: #f8f9fa; padding: 20px; margin-bottom: 20px; }
+        nav a { margin-right: 15px; text-decoration: none; color: #007bff; }
+        nav a:hover { text-decoration: underline; }
+        .alert { padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; background: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="/">Home</a>
+            <a href="/hello/public">Hello Public</a>
+            <a href="/hello/private">Hello Private</a>
+            <a href="/secured">Secured Page</a>
+            <a href="/admin">Admin Page</a>
+            <a href="/login">Login</a>
+            <a href="/logout">Logout</a>
+        </nav>
+        
+        <h1>Spring Security Demo</h1>
+        
+        <div class="alert">
+            <p th:text="${message}">Welcome message</p>
+        </div>
+        
+        <h2>About this demo:</h2>
+        <ul>
+            <li><strong>Public pages:</strong> "/", "/home", and "/hello/public" - accessible without authentication</li>
+            <li><strong>Protected pages:</strong> "/hello/private", "/secured" and "/admin" - require authentication</li>
+            <li><strong>API Endpoints:</strong>
+                <ul>
+                    <li><code>GET /hello/public</code> - Returns "hello public" (no auth required)</li>
+                    <li><code>GET /hello/private</code> - Returns "hello private" (auth required)</li>
+                </ul>
+            </li>
+            <li><strong>Test users:</strong>
+                <ul>
+                    <li>Username: <code>user</code>, Password: <code>password</code> (USER role)</li>
+                    <li>Username: <code>admin</code>, Password: <code>admin</code> (ADMIN role)</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

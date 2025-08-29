@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Security Demo - Admin</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        nav { background: #f8f9fa; padding: 20px; margin-bottom: 20px; }
+        nav a { margin-right: 15px; text-decoration: none; color: #007bff; }
+        nav a:hover { text-decoration: underline; }
+        .alert { padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; background: #f8d7da; border-color: #f5c6cb; }
+        .user-info { background: #e9ecef; padding: 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="/">Home</a>
+            <a href="/hello/public">Hello Public</a>
+            <a href="/hello/private">Hello Private</a>
+            <a href="/secured">Secured Page</a>
+            <a href="/admin">Admin Page</a>
+            <a href="/logout">Logout</a>
+        </nav>
+        
+        <h1>Admin Page</h1>
+        
+        <div class="alert">
+            <p th:text="${message}">Admin message</p>
+        </div>
+        
+        <div class="user-info">
+            <h3>Admin User Information:</h3>
+            <p><strong>Username:</strong> <span th:text="${username}">username</span></p>
+        </div>
+        
+        <p>This is the admin area. Only users with ADMIN role can access this page.</p>
+        
+        <h3>Admin Functions:</h3>
+        <ul>
+            <li>User management</li>
+            <li>System configuration</li>
+            <li>Security settings</li>
+        </ul>
+    </div>
+</body>
+</html>

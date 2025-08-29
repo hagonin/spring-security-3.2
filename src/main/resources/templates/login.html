@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Security Demo - Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f8f9fa; }
+        .container { max-width: 400px; margin: 100px auto; }
+        .login-form { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .error { color: #dc3545; margin-top: 10px; }
+        .info { background: #d1ecf1; padding: 15px; border-radius: 5px; margin-bottom: 20px; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-form">
+            <h2>Login to Spring Security Demo</h2>
+            
+            <div class="info">
+                <strong>Test Credentials:</strong><br>
+                User: <code>user</code> / <code>password</code><br>
+                Admin: <code>admin</code> / <code>admin</code>
+            </div>
+            
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit">Login</button>
+            </form>
+            
+            <div th:if="${param.error}" class="error">
+                Invalid username or password.
+            </div>
+            
+            <div th:if="${param.logout}" class="error">
+                You have been logged out.
+            </div>
+            
+            <p style="margin-top: 20px; text-align: center;">
+                <a href="/">← Back to Home</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
